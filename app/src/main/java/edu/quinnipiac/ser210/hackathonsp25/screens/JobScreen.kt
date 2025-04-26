@@ -105,26 +105,20 @@ fun JobListings() {
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.fillMaxSize()
     ) {
-        item {
-            JobCard("Veterinary Assistant", "PetCare Clinic", painterResource(R.drawable.samplelogo))
+        item{
+            JobCard("Software Engineer", "Travelers", painterResource(R.drawable.travellers))
         }
-        item {
-            JobCard("Dog Walker", "Happy Tails Agency", painterResource(R.drawable.samplelogo))
+        item{
+            JobCard("iOS Developer", "Travelers", painterResource(R.drawable.travellers))
         }
-        item {
-            JobCard("Pet Groomer", "Furry Friends Salon", painterResource(R.drawable.samplelogo))
+        item{
+            JobCard("Operations Manager", "M&T Bank", painterResource(R.drawable.mnt))
         }
-        item {
-            JobCard("Animal Trainer", "Pawfect Training", painterResource(R.drawable.samplelogo))
+        item{
+            JobCard("Cloud Solutions Architect", "UNAPEN", painterResource(R.drawable.unapen))
         }
-        item {
-            JobCard("Pet Store Associate", "PetSmart", painterResource(R.drawable.samplelogo))
-        }
-        item {
-            JobCard("Kennel Assistant", "Cozy Pet Hotel", painterResource(R.drawable.samplelogo))
-        }
-        item {
-            JobCard("Veterinary Receptionist", "Animal Care Hospital", painterResource(R.drawable.samplelogo))
+        item{
+            JobCard("Data Scientist", "M&T Bank", painterResource(R.drawable.mnt))
         }
         item {
             JobCard("Pet Nutritionist", "Healthy Pets Inc.", painterResource(R.drawable.samplelogo))

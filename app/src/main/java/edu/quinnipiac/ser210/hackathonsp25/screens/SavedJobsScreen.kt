@@ -27,19 +27,19 @@ fun SavedJobsScreen(){
                 .padding(16.dp)
         ){
             item{
-                JobCard("Software Engineer", "Google", painterResource(R.drawable.samplelogo))
+                JobCard("Software Engineer", "Travelers", painterResource(R.drawable.travellers))
             }
             item{
-                JobCard("iOS Developer", "Apple", painterResource(R.drawable.samplelogo))
+                JobCard("iOS Developer", "Travelers", painterResource(R.drawable.travellers))
             }
             item{
-                JobCard("Operations Manager", "Amazon", painterResource(R.drawable.samplelogo))
+                JobCard("Operations Manager", "M&T Bank", painterResource(R.drawable.mnt))
             }
             item{
-                JobCard("Cloud Solutions Architect", "Microsoft", painterResource(R.drawable.samplelogo))
+                JobCard("Cloud Solutions Architect", "UNAPEN", painterResource(R.drawable.unapen))
             }
             item{
-                JobCard("Data Scientist", "Meta", painterResource(R.drawable.samplelogo))
+                JobCard("Data Scientist", "M&T Bank", painterResource(R.drawable.mnt))
             }
             item{
                 JobCard("Manufacturing Engineer", "Tesla", painterResource(R.drawable.samplelogo))
