@@ -159,43 +159,57 @@ fun PetInfo(name: String, level: Int, xp: Int, maxXp: Int){
 
 @Composable
 fun SpriteAnimation() {
-    val frames = listOf(
+    val walkingRightFrames = listOf(
         R.drawable.walk1,
         R.drawable.walk2,
         R.drawable.walk3,
         R.drawable.walk4
     )
 
+    val walkingLeftFrames = listOf(
+        R.drawable.walkl1,
+        R.drawable.walkl2,
+        R.drawable.walkl3,
+        R.drawable.walkl4
+    )
+
     var currentFrame by remember { mutableIntStateOf(0) }
     val xOffset = remember { Animatable(0f) }
+    var movingRight by remember { mutableStateOf(true) } // <--- Track direction!
 
     LaunchedEffect(Unit) {
         while (true) {
-            delay(100L) // 100ms between frames
-            currentFrame = (currentFrame + 1) % frames.size
+            delay(100L)
+            currentFrame = (currentFrame + 1) % 4
         }
     }
 
     // Move left and right infinitely
     LaunchedEffect(Unit) {
         while (true) {
+            // Move right
+            movingRight = true
             xOffset.animateTo(
-                targetValue = 300f,
+                targetValue = 350f,
                 animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
             )
+            // Move left
+            movingRight = false
             xOffset.animateTo(
-                targetValue = -300f,
+                targetValue = -350f,
                 animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
             )
         }
     }
 
+    val framesToUse = if (movingRight) walkingRightFrames else walkingLeftFrames
+
     Image(
-        painter = painterResource(id = frames[currentFrame]),
+        painter = painterResource(id = framesToUse[currentFrame]),
         contentDescription = null,
         modifier = Modifier
             .size(80.dp)
-            .offset { IntOffset((xOffset.value + 50f).roundToInt(), 750) }
+            .offset { IntOffset((xOffset.value + 450f).roundToInt(), 750) }
     )
 }
 

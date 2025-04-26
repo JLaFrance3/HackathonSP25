@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -25,11 +26,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import edu.quinnipiac.ser210.hackathonsp25.R
+import edu.quinnipiac.ser210.hackathonsp25.ui.theme.AppTheme
 
 @Composable
 fun JobCard(
@@ -39,8 +42,8 @@ fun JobCard(
 ){
     Card(
         shape = RoundedCornerShape(28.dp),
-        border = BorderStroke(4.dp, MaterialTheme.colorScheme.tertiary),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary),
+        border = BorderStroke(4.dp, MaterialTheme.colorScheme.onPrimary),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiary),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         modifier = Modifier
             .fillMaxWidth()
@@ -62,9 +65,10 @@ fun JobCard(
                 // Title
                 Text(
                     text = jobTitle,
-                    fontSize = 35.sp,
+                    fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    maxLines = 1
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -81,7 +85,7 @@ fun JobCard(
                     // Company
                     Text(
                         text = company,
-                        fontSize = 20.sp,
+                        fontSize = 22.sp,
                         maxLines = 1
                     )
                 }
@@ -100,21 +104,33 @@ fun JobCard(
                     onClick = { uriHandler.openUri("https://www.youtube.com/watch?v=GBIIQ0kP15E") },
                     content = {
                         Text("Apply")
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onTertiary
+                    )
                 )
                 // Research
                 Button(
                     onClick = { uriHandler.openUri("https://www.youtube.com/@MrBeast") },
                     content = {
                         Text("Research")
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onTertiary
+                    )
                 )
                 // Save
                 Button(
                     onClick = { uriHandler.openUri("https://www.youtube.com") },
                     content = {
                         Icon(painterResource(R.drawable.bookmark), contentDescription = null)
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onTertiary
+                    )
                 )
             }
         }
@@ -125,6 +141,8 @@ fun JobCard(
 @Preview
 @Composable
 fun Preview(){
-    JobCard("Engineer", "Google", painterResource(R.drawable.samplelogo))
+    AppTheme {
+        JobCard("Engineer", "Google", painterResource(R.drawable.samplelogo))
+    }
 }
 
