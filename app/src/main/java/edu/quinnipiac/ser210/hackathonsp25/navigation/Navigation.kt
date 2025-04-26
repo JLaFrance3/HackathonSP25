@@ -25,7 +25,7 @@ fun Navigation(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screens.HomeScreen,
+            startDestination = Screens.HomeScreen.name,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
