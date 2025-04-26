@@ -12,6 +12,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -47,27 +52,39 @@ val petSupplies = listOf(
 @Composable
 fun PetSuppliesScreen() {
     val context = LocalContext.current
-    val fullBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.petsupply)
+    var fullBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(
-            text = "Pet Supplies",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+    LaunchedEffect(Unit) {
+        fullBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.petsupply)
+    }
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.fillMaxSize()
-        ) {
-            items(petSupplies) { supply ->
-                SupplyItem(supply, fullBitmap)
+    if (fullBitmap == null) {
+        // Show a loading UI if you want
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("Loading...")
+        }
+    } else {
+        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            Text(
+                text = "Pet Supplies",
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(petSupplies) { supply ->
+                    SupplyItem(supply, fullBitmap!!)
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun SupplyItem(supply: PetSupply, fullBitmap: Bitmap) {
