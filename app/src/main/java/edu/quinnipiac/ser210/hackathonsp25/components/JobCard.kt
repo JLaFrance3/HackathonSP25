@@ -39,7 +39,8 @@ import edu.quinnipiac.ser210.hackathonsp25.ui.theme.AppTheme
 fun JobCard(
     jobTitle: String,
     company: String,
-    logo: Int
+    logo: Int,
+    link: String
 ){
     Card(
         shape = RoundedCornerShape(28.dp),
@@ -102,7 +103,7 @@ fun JobCard(
             ){
                 // Apply
                 Button(
-                    onClick = { uriHandler.openUri("https://www.youtube.com/watch?v=GBIIQ0kP15E") },
+                    onClick = { uriHandler.openUri(link) },
                     content = {
                         Text("Apply")
                     },
@@ -113,7 +114,7 @@ fun JobCard(
                 )
                 // Research
                 Button(
-                    onClick = { uriHandler.openUri("https://www.youtube.com/@MrBeast") },
+                    onClick = { uriHandler.openUri(link) },
                     content = {
                         Text("Research")
                     },
@@ -137,13 +138,3 @@ fun JobCard(
         }
     }
 }
-
-
-@Preview
-@Composable
-fun Preview(){
-    AppTheme {
-        JobCard("Engineer", "Google", R.drawable.samplelogo)
-    }
-}
-
