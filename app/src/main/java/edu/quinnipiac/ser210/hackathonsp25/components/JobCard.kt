@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,12 +26,13 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import edu.quinnipiac.ser210.rezippy.R
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 
 @Composable
 fun JobCard(
     jobTitle: String,
     company: String,
-    logo: ImageVector
+    logo: Painter
 ){
     Card(
         shape = RoundedCornerShape(28.dp),
@@ -93,6 +95,6 @@ fun JobCard(
 @Preview
 @Composable
 fun Preview(){
-    JobCard("Engineer", "Epic company", Icons.Default.Info)
+    JobCard("Engineer", "Epic company", painterResource(R.drawable.samplelogo))
 }
 

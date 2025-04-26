@@ -1,4 +1,5 @@
 package edu.quinnipiac.ser210.hackathonsp25.screens
 
-class JobScreen {
-}
+import androidx.compose.runtime.Composable
+
+@Composable
