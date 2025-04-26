@@ -34,6 +34,7 @@ import kotlinx.coroutines.delay
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.IntOffset
+import com.airbnb.lottie.L
 import kotlin.math.roundToInt
 
 @Composable
@@ -173,9 +174,17 @@ fun SpriteAnimation() {
         R.drawable.walkl4
     )
 
+    val idleFrames = listOf(
+        R.drawable.t1,
+        R.drawable.t2,
+        R.drawable.t3,
+        R.drawable.t3
+    )
+
     var currentFrame by remember { mutableIntStateOf(0) }
     val xOffset = remember { Animatable(0f) }
-    var movingRight by remember { mutableStateOf(true) } // <--- Track direction!
+    var movingRight by remember { mutableStateOf(true) }
+    var idle by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -189,6 +198,7 @@ fun SpriteAnimation() {
         while (true) {
             // Move right
             movingRight = true
+            idle = false
             xOffset.animateTo(
                 targetValue = 350f,
                 animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
@@ -199,17 +209,27 @@ fun SpriteAnimation() {
                 targetValue = -350f,
                 animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
             )
+            // Idle
+            idle = true
+            xOffset.snapTo(-350f) // <- instantly jump to center, no smooth animation
+            delay(4000L)
         }
     }
 
-    val framesToUse = if (movingRight) walkingRightFrames else walkingLeftFrames
+    val framesToUse: List<Int> = if(idle){
+        idleFrames
+    } else if(movingRight){
+        walkingRightFrames
+    } else {
+        walkingLeftFrames
+    }
 
     Image(
         painter = painterResource(id = framesToUse[currentFrame]),
         contentDescription = null,
         modifier = Modifier
             .size(80.dp)
-            .offset { IntOffset((xOffset.value + 450f).roundToInt(), 750) }
+            .offset { IntOffset((xOffset.value + 350f).roundToInt(), 750) }
     )
 }
 
