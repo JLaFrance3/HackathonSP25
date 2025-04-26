@@ -2,7 +2,10 @@ package edu.quinnipiac.ser210.hackathonsp25.navigation
 
 enum class Screens {
     HomeScreen,
-    DetailScreen;
+    JobScreen,
+    PetSuppliesScreen,
+    ProfileScreen,
+    SavedJobsScreen;
     companion object {
         fun fromRoute(route: String?): Screens
                 = when (route?.substringBefore("/")) {
