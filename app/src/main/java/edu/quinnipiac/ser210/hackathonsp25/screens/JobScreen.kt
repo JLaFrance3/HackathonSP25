@@ -106,22 +106,22 @@ fun JobListings() {
         modifier = Modifier.fillMaxSize()
     ) {
         item{
-            JobCard("Software Engineer", "Travelers", painterResource(R.drawable.travellers))
+            JobCard("Software Engineer", "Travelers", (R.drawable.travellers))
         }
         item{
-            JobCard("iOS Developer", "Travelers", painterResource(R.drawable.travellers))
+            JobCard("iOS Developer", "Travelers", (R.drawable.travellers))
         }
         item{
-            JobCard("Operations Manager", "M&T Bank", painterResource(R.drawable.mnt))
+            JobCard("Operations Manager", "M&T Bank", (R.drawable.mnt))
         }
         item{
-            JobCard("Cloud Solutions Architect", "UNAPEN", painterResource(R.drawable.unapen))
+            JobCard("Cloud Solutions Architect", "UNAPEN", (R.drawable.unapen))
         }
         item{
-            JobCard("Data Scientist", "M&T Bank", painterResource(R.drawable.mnt))
+            JobCard("Data Scientist", "M&T Bank", (R.drawable.mnt))
         }
         item {
-            JobCard("Pet Nutritionist", "Healthy Pets Inc.", painterResource(R.drawable.samplelogo))
+            JobCard("Pet Nutritionist", "Healthy Pets Inc.", (R.drawable.samplelogo))
         }
     }
 }
