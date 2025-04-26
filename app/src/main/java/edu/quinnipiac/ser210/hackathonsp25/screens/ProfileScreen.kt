@@ -4,13 +4,17 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,12 +37,20 @@ fun ProfileScreen() {
     val name = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
     var resumeUri by remember { mutableStateOf<Uri?>(null) }
+    var profilePictureUri by remember { mutableStateOf<Uri?>(null) }
 
-    // File picker launcher
-    val launcher = rememberLauncherForActivityResult(
+    // File picker launcher for profile picture
+    val profilePictureLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        resumeUri = uri // Save the selected file URI
+        profilePictureUri = uri // Save the selected profile picture URI
+    }
+
+    // File picker launcher for resume
+    val resumeLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        resumeUri = uri // Save the selected resume URI
     }
 
     Box(
@@ -61,11 +73,38 @@ fun ProfileScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Semi-transparent background for content
+            // Profile Picture
+            Box(
+                modifier = Modifier
+                    .size(120.dp)
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
+                    .clickable { profilePictureLauncher.launch("image/*") },
+                contentAlignment = Alignment.Center
+            ) {
+                if (profilePictureUri != null) {
+                    AsyncImage(
+                        model = profilePictureUri,
+                        contentDescription = "Profile Picture",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    Text(
+                        text = "Upload Picture",
+                        color = Color.Gray,
+                        fontSize = 12.sp
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // White box around text fields and button
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White.copy(alpha = 0.8f))
+                    .background(Color.White, shape = RoundedCornerShape(12.dp))
                     .padding(16.dp)
             ) {
                 Column {
@@ -112,7 +151,7 @@ fun ProfileScreen() {
                     Spacer(modifier = Modifier.height(16.dp))
 
                     // Button to upload resume
-                    Button(onClick = { launcher.launch("application/pdf") }) {
+                    Button(onClick = { resumeLauncher.launch("application/pdf") }) {
                         Text(text = "Upload Resume")
                     }
 
