@@ -1,5 +1,7 @@
 package edu.quinnipiac.ser210.hackathonsp25.screens
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,8 +24,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.example.compose.AppTheme
+import edu.quinnipiac.ser210.hackathonsp25.ui.theme.AppTheme
 import edu.quinnipiac.ser210.hackathonsp25.R
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.delay
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.unit.IntOffset
+import kotlin.math.roundToInt
 
 @Composable
 fun HomeScreen(
@@ -102,13 +113,14 @@ fun PetDisplay(){
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(480.dp)
+//            .height(480.dp)
     ){
         AsyncImage(
             model = R.drawable.cartoonbackground,
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
+        SpriteAnimation()
     }
 }
 
@@ -145,6 +157,48 @@ fun PetInfo(name: String, level: Int, xp: Int, maxXp: Int){
 
 }
 
+@Composable
+fun SpriteAnimation() {
+    val frames = listOf(
+        R.drawable.walk1,
+        R.drawable.walk2,
+        R.drawable.walk3,
+        R.drawable.walk4
+    )
+
+    var currentFrame by remember { mutableIntStateOf(0) }
+    val xOffset = remember { Animatable(0f) }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(100L) // 100ms between frames
+            currentFrame = (currentFrame + 1) % frames.size
+        }
+    }
+
+    // Move left and right infinitely
+    LaunchedEffect(Unit) {
+        while (true) {
+            xOffset.animateTo(
+                targetValue = 300f,
+                animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
+            )
+            xOffset.animateTo(
+                targetValue = -300f,
+                animationSpec = tween(durationMillis = 2000, easing = LinearEasing)
+            )
+        }
+    }
+
+    Image(
+        painter = painterResource(id = frames[currentFrame]),
+        contentDescription = null,
+        modifier = Modifier
+            .size(80.dp)
+            .offset { IntOffset((xOffset.value + 50f).roundToInt(), 750) }
+    )
+}
+
 @Preview
 @Composable
 fun HomeScreenPreview(){
@@ -152,11 +206,3 @@ fun HomeScreenPreview(){
         HomeScreen()
     }
 }
-
-
-@Preview
-@Composable
-fun QuestsPreview(){
-    Quests()
-}
-
