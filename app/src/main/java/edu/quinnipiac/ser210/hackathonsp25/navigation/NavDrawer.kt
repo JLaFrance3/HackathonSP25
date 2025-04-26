@@ -256,10 +256,8 @@ fun NavDrawer(
                     Text(
                         text = "Settings",
                         fontSize = 20.sp,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(16.dp)
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold
                     )
                     // Settings option
                     NavigationDrawerItem(

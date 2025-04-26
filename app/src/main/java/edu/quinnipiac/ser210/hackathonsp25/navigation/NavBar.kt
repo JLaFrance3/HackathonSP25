@@ -51,7 +51,7 @@ fun NavBar (
     var navBarText = when (currentRoute?.substringBefore("/")) {
         Screens.HomeScreen.name -> "Home"
         Screens.JobScreen.name -> "Jobs"
-        Screens.PetSuppliesScreen.name -> "Supplies"
+        Screens.PetSuppliesScreen.name -> "Pet Supplies"
         Screens.ProfileScreen.name -> "Profile"
         Screens.SavedJobsScreen.name -> "Saved"
         else -> "Change this text in NavBar.kt"
@@ -62,47 +62,40 @@ fun NavBar (
         navBarText = "Pawfessional"
     }
 
-    Column { // (For a divider line at the bottom)
-        CenterAlignedTopAppBar(
-            title = {
-                // Box to scale text
-                Box {
-                    Text(
-                        text = navBarText,
-                        color = MaterialTheme.colorScheme.onSecondary,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.W900,
-                        textAlign = TextAlign.Center,
-                    )
-                }
-            },
-            navigationIcon = {
-                IconButton(
-                    onClick = {
-                        scope.launch {
-                            drawerState.open()
-                        }
+    CenterAlignedTopAppBar(
+        title = {
+            // Box to scale text
+            Box {
+                Text(
+                    text = navBarText,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.W900,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        },
+        navigationIcon = {
+            IconButton(
+                onClick = {
+                    scope.launch {
+                        drawerState.open()
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Menu,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSecondary,
-                        modifier = Modifier
-                            .size(32.dp)
-                    )
                 }
-            },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.secondary
-            ),
-            modifier = modifier
-                .fillMaxWidth()
-        )
-
-        HorizontalDivider(
-            color = MaterialTheme.colorScheme.tertiary,
-            thickness = 3.dp
-        )
-    }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSecondary,
+                    modifier = Modifier
+                        .size(32.dp)
+                )
+            }
+        },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
+        modifier = modifier
+            .fillMaxWidth()
+    )
 }

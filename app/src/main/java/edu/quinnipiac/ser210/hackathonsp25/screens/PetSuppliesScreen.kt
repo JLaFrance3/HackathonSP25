@@ -1,7 +1,5 @@
 package edu.quinnipiac.ser210.hackathonsp25.screens
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -12,90 +10,57 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import edu.quinnipiac.ser210.hackathonsp25.R
 
-
 // --- Data class for Supplies ---
 data class PetSupply(
     val name: String,
-    val x: Int,
-    val y: Int,
-    val width: Int,
-    val height: Int
-)
-
-// --- Sample Data ---
-val petSupplies = listOf(
-    PetSupply("Kibble", 300, 0, 900, 1100),
-    PetSupply("Water Bowl", 1200, 0, 1050, 1100),
-    PetSupply("Food Bowl", 2250, 0, 900, 1100),
-    PetSupply("Ball", 350, 1230, 560, 580),
-    PetSupply("Tennis Ball", 940, 1200, 300, 300),
-    PetSupply("Toy", 1955, 1085, 700, 760),
-    PetSupply("Rope", 2670, 1100, 800, 725),
-    PetSupply("Treats", 1415, 1953, 675, 775),
-    PetSupply("Paw Bowl", 345, 2075, 800, 615)
+    val imageRes: Int
 )
 
 // --- Pet Supplies Screen ---
 @Composable
 fun PetSuppliesScreen() {
-    val context = LocalContext.current
-    var fullBitmap by remember { mutableStateOf<Bitmap?>(null) }
+    val petSupplies = listOf(
+        PetSupply("Kibble", R.drawable.kibble),
+        PetSupply("Ball", R.drawable.ball),
+        PetSupply("Toy", R.drawable.toy),
+        PetSupply("Water Bowl", R.drawable.water_bowl),
+        PetSupply("Bone", R.drawable.bone),
+        PetSupply("Dog Bowl", R.drawable.dog_bowl),
+        PetSupply("Food Bowl", R.drawable.food_bowl),
+        PetSupply("Rope", R.drawable.rope),
+        PetSupply("Treats", R.drawable.treats)
+    )
 
-    LaunchedEffect(Unit) {
-        fullBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.petsupply)
-    }
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text(
+            text = "Pet Supplies",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
 
-    if (fullBitmap == null) {
-        // Show a loading UI if you want
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Loading...")
-        }
-    } else {
-        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-            Text(
-                text = "Pet Supplies",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(petSupplies) { supply ->
-                    SupplyItem(supply, fullBitmap!!)
-                }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(petSupplies) { supply ->
+                SupplyItem(supply)
             }
         }
     }
 }
 
-
 @Composable
-fun SupplyItem(supply: PetSupply, fullBitmap: Bitmap) {
-    val itemBitmap = Bitmap.createBitmap(
-        fullBitmap,
-        supply.x,
-        supply.y,
-        supply.width,
-        supply.height
-    )
-
+fun SupplyItem(supply: PetSupply) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -110,12 +75,19 @@ fun SupplyItem(supply: PetSupply, fullBitmap: Bitmap) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                bitmap = itemBitmap.asImageBitmap(),
+                painter = painterResource(id = supply.imageRes),
                 contentDescription = supply.name,
-                modifier = Modifier.size(64.dp)
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .aspectRatio(1f)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = supply.name, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = supply.name,
+                style = MaterialTheme.typography.headlineSmall,
+                maxLines = 1
+            )
         }
     }
 }
@@ -123,7 +95,7 @@ fun SupplyItem(supply: PetSupply, fullBitmap: Bitmap) {
 @Preview(showBackground = true)
 @Composable
 fun PetSuppliesScreenPreview() {
-    // Fake preview without actual bitmap loading
+    // Fake preview without actual image loading
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(
             text = "Pet Supplies (Preview)",
@@ -137,7 +109,7 @@ fun PetSuppliesScreenPreview() {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            items(petSupplies) { supply ->
+            items(5) { index ->
                 Card(
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                     modifier = Modifier
@@ -153,11 +125,15 @@ fun PetSuppliesScreenPreview() {
                     ) {
                         Box(
                             modifier = Modifier
-                                .size(64.dp)
-                                .padding(8.dp)
+                                .fillMaxWidth(0.8f)
+                                .aspectRatio(1f)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = supply.name, style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            text = "Item $index",
+                            style = MaterialTheme.typography.bodyMedium,
+                            maxLines = 1
+                        )
                     }
                 }
             }
