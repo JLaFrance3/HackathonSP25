@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
@@ -66,11 +67,43 @@ fun NavDrawer(
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(16.dp)
                     )
+                    //Profile option
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = "Profile",
+                                fontSize = 20.sp,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Filled.AccountCircle,
+                                contentDescription = null
+                            )
+                        },
+                        selected = selectedScreen.value == Screens.ProfileScreen.name,
+                        onClick = {
+                            scope.launch {
+                                drawerState.close()
+                                selectedScreen.value = Screens.ProfileScreen.name
+                                navController.navigate(Screens.ProfileScreen.name)
+                            }
+                        },
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedContainerColor = MaterialTheme.colorScheme.secondary,
+                            selectedContainerColor = MaterialTheme.colorScheme.tertiary,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedTextColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    )
                     HorizontalDivider()
 
-                    // Pages section
                     Text(
-                        text = "Pages",
+                        text = "Pet",
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.Bold,
@@ -109,7 +142,83 @@ fun NavDrawer(
                             selectedTextColor = MaterialTheme.colorScheme.onSecondary
                         )
                     )
-                    // Favorites option
+                    //Pet stuff option
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = "Pet Supplies",
+                                fontSize = 20.sp,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(R.drawable.paw),
+                                contentDescription = null
+                            )
+                        },
+                        selected = selectedScreen.value == Screens.PetSuppliesScreen.name,
+                        onClick = {
+                            scope.launch {
+                                drawerState.close()
+                                selectedScreen.value = Screens.PetSuppliesScreen.name
+                                navController.navigate(Screens.PetSuppliesScreen.name)
+                            }
+                        },
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedContainerColor = MaterialTheme.colorScheme.secondary,
+                            selectedContainerColor = MaterialTheme.colorScheme.tertiary,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedTextColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    )
+                    HorizontalDivider()
+
+                    // Jobs section
+                    Text(
+                        text = "Job",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                    // Jobs option
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = "Jobs",
+                                fontSize = 20.sp,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = null
+                            )
+                        },
+                        selected = false,
+                        onClick = {
+                            scope.launch {
+                                drawerState.close()
+                                selectedScreen.value = Screens.JobScreen.name
+                                navController.navigate(Screens.JobScreen.name)
+                            }
+                        },
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedContainerColor = MaterialTheme.colorScheme.secondary,
+                            selectedContainerColor = MaterialTheme.colorScheme.tertiary,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedIconColor = MaterialTheme.colorScheme.onSecondary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
+                            selectedTextColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    )
+                    // Saved Jobs option
                     NavigationDrawerItem(
                         label = {
                             Text(
@@ -142,38 +251,6 @@ fun NavDrawer(
                             selectedTextColor = MaterialTheme.colorScheme.onSecondary
                         )
                     )
-                    // Suggestions option
-                    NavigationDrawerItem(
-                        label = {
-                            Text(
-                                text = "Suggestions",
-                                fontSize = 20.sp,
-                                style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold
-                            )
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = null
-                            )
-                        },
-                        selected = false,
-                        onClick = {
-                            scope.launch {
-                                drawerState.close()
-                                //TODO: AI Suggestions screen
-                            }
-                        },
-                        colors = NavigationDrawerItemDefaults.colors(
-                            unselectedContainerColor = MaterialTheme.colorScheme.secondary,
-                            selectedContainerColor = MaterialTheme.colorScheme.tertiary,
-                            unselectedIconColor = MaterialTheme.colorScheme.onSecondary,
-                            selectedIconColor = MaterialTheme.colorScheme.onSecondary,
-                            unselectedTextColor = MaterialTheme.colorScheme.onSecondary,
-                            selectedTextColor = MaterialTheme.colorScheme.onSecondary
-                        )
-                    )
 
                     // Settings section
                     Text(
@@ -184,7 +261,6 @@ fun NavDrawer(
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(16.dp)
                     )
-
                     // Settings option
                     NavigationDrawerItem(
                         label = {
@@ -201,12 +277,10 @@ fun NavDrawer(
                                 contentDescription = null
                             )
                         },
-                        selected = selectedScreen.value == Screens.SettingScreen.name,
+                        selected = selectedScreen.value == "SettingsScreen",    //Doesn't exist
                         onClick = {
                             scope.launch {
-                                drawerState.close()
-                                selectedScreen.value = Screens.SettingScreen.name
-                                navController.navigate(Screens.SettingScreen.name)
+                                //Nothin
                             }
                         },
                         colors = NavigationDrawerItemDefaults.colors(
@@ -228,7 +302,7 @@ fun NavDrawer(
                                 fontWeight = FontWeight.Bold
                             )
                         },
-                        selected = selectedScreen.value == Screens.HelpScreen.name,
+                        selected = selectedScreen.value == "Help Screen",    //Doesn't exist
                         icon = {
                             Icon(
                                 imageVector = Icons.Outlined.Info,
@@ -237,9 +311,7 @@ fun NavDrawer(
                         },
                         onClick = {
                             scope.launch {
-                                drawerState.close()
-                                selectedScreen.value = Screens.HelpScreen.name
-                                navController.navigate(Screens.HelpScreen.name)
+                                //Nothin
                             }
                         },
                         colors = NavigationDrawerItemDefaults.colors(
