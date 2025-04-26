@@ -34,6 +34,7 @@ import kotlinx.coroutines.delay
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.IntOffset
+import coil3.compose.AsyncImagePainter.State.Empty.painter
 import com.airbnb.lottie.L
 import kotlin.math.roundToInt
 
@@ -224,13 +225,36 @@ fun SpriteAnimation() {
         walkingLeftFrames
     }
 
-    Image(
-        painter = painterResource(id = framesToUse[currentFrame]),
-        contentDescription = null,
+    Box(
+        contentAlignment = Alignment.Center, // centers contents inside Box
         modifier = Modifier
-            .size(80.dp)
-            .offset { IntOffset((xOffset.value + 350f).roundToInt(), 750) }
-    )
+            .fillMaxWidth()
+    ){
+        if (idle) {
+            // Text bubble shown only when idling
+            Text(
+                text = "Woof 🐶 Its a good day to get a job!",
+                modifier = Modifier
+                    .align(Alignment.TopCenter) // <--- THIS centers it horizontally
+                    .offset(y = 200.dp, x = -50.dp)           // move it DOWN a little from the top
+                    .background(
+                        MaterialTheme.colorScheme.primary,
+                        shape = MaterialTheme.shapes.medium
+                    )
+                    .padding(8.dp),
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontSize = 16.sp
+            )
+        }
+
+        Image(
+            painter = painterResource(id = framesToUse[currentFrame]),
+            contentDescription = null,
+            modifier = Modifier
+                .size(80.dp)
+                .offset { IntOffset((xOffset.value + 0f).roundToInt(), 750) }
+        )
+    }
 }
 
 @Preview
