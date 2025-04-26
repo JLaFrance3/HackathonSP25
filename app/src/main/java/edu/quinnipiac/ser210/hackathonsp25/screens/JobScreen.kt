@@ -35,7 +35,10 @@ fun JobScreen() {
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                label = { Text("Search Jobs") },
+                label = { Text(
+                    text = "Search Jobs",
+                    color = MaterialTheme.colorScheme.outlineVariant
+                    ) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,

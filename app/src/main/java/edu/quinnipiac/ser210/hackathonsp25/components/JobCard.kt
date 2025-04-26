@@ -107,8 +107,8 @@ fun JobCard(
                         Text("Apply")
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.onTertiary
+                        containerColor = MaterialTheme.colorScheme.onTertiary,
+                        contentColor = MaterialTheme.colorScheme.tertiary
                     )
                 )
                 // Research
@@ -118,8 +118,8 @@ fun JobCard(
                         Text("Research")
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.onTertiary
+                        containerColor = MaterialTheme.colorScheme.onTertiary,
+                        contentColor = MaterialTheme.colorScheme.tertiary
                     )
                 )
                 // Save
@@ -129,8 +129,8 @@ fun JobCard(
                         Icon(painterResource(R.drawable.bookmark), contentDescription = null)
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.onTertiary
+                        containerColor = MaterialTheme.colorScheme.onTertiary,
+                        contentColor = MaterialTheme.colorScheme.tertiary
                     )
                 )
             }
