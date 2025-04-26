@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "edu.quinnipiac.ser210.rezippy"
+    namespace = "edu.quinnipiac.ser210.hackathonsp25"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "edu.quinnipiac.ser210.rezippy"
+        applicationId = "edu.quinnipiac.ser210.hackathonsp25"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

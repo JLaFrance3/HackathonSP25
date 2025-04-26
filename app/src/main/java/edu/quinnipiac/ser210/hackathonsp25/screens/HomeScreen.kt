@@ -11,7 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import edu.quinnipiac.ser210.rezippy.R
+import edu.quinnipiac.ser210.hackathonsp25.R
 
 @Composable
 fun HomeScreen(

@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.quinnipiac.ser210.hackathonsp25.components.JobCard
-import edu.quinnipiac.ser210.rezippy.R
+import edu.quinnipiac.ser210.hackathonsp25.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

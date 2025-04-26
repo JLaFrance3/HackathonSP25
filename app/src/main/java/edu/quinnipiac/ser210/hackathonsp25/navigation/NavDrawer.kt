@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import edu.quinnipiac.ser210.rezippy.R
+import edu.quinnipiac.ser210.hackathonsp25.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

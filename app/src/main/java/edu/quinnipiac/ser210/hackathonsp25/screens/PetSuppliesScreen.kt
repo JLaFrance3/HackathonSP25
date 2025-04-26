@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import edu.quinnipiac.ser210.hackathonsp25.R
+
 
 // --- Data class for Supplies ---
 data class PetSupply(
@@ -45,7 +47,7 @@ val petSupplies = listOf(
 @Composable
 fun PetSuppliesScreen() {
     val context = LocalContext.current
-    val fullBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.foodsupply)
+    val fullBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.petsupply)
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(
