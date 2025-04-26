@@ -53,7 +53,8 @@ fun NavDrawer(
             ) {
                 Column (
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.padding(horizontal = 16.dp)
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
                         .background(MaterialTheme.colorScheme.primary)
                         .verticalScroll(rememberScrollState())
                 ) {
@@ -201,12 +202,12 @@ fun NavDrawer(
                                 contentDescription = null
                             )
                         },
-                        selected = selectedScreen.value == Screens.SettingScreen.name,
+                        selected = false,
                         onClick = {
                             scope.launch {
                                 drawerState.close()
-                                selectedScreen.value = Screens.SettingScreen.name
-                                navController.navigate(Screens.SettingScreen.name)
+//                                selectedScreen.value = Screens.SettingScreen.name
+//                                navController.navigate(Screens.SettingScreen.name)
                             }
                         },
                         colors = NavigationDrawerItemDefaults.colors(
@@ -228,7 +229,7 @@ fun NavDrawer(
                                 fontWeight = FontWeight.Bold
                             )
                         },
-                        selected = selectedScreen.value == Screens.HelpScreen.name,
+                        selected = false,
                         icon = {
                             Icon(
                                 imageVector = Icons.Outlined.Info,
@@ -238,8 +239,8 @@ fun NavDrawer(
                         onClick = {
                             scope.launch {
                                 drawerState.close()
-                                selectedScreen.value = Screens.HelpScreen.name
-                                navController.navigate(Screens.HelpScreen.name)
+//                                selectedScreen.value = Screens.HelpScreen.name
+//                                navController.navigate(Screens.HelpScreen.name)
                             }
                         },
                         colors = NavigationDrawerItemDefaults.colors(

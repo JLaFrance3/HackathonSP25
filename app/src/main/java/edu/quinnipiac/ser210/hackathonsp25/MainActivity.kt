@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.compose.AppTheme
-import edu.quinnipiac.ser210.hackathonsp25.ui.theme.HackathonSP25Theme
+import edu.quinnipiac.ser210.hackathonsp25.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +28,7 @@ class MainActivity : ComponentActivity() {
                 useDarkTheme = isDarkMode,
                 onToggleTheme = { isDarkMode = !isDarkMode }
             ) {
-                Navigation(
-                    recipeViewModel,
-                    isDarkMode = isDarkMode,
-                    onToggleTheme = { isDarkMode = !isDarkMode }
-                )
+                Navigation()
             }
         }
     }

@@ -33,15 +33,6 @@ fun Navigation(
             composable(Screens.HomeScreen.name) {
                 HomeScreen()
             }
-            composable(
-                Screens.DetailScreen.name+"/{name}",
-                arguments = listOf(navArgument(name = "name") {type = NavType.StringType})
-            ) {
-
-                DetailScreen(
-
-                )
-            }
         }
     }
 }

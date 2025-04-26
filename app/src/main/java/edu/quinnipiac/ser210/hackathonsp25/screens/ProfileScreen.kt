@@ -6,9 +6,7 @@ import androidx.navigation.NavController
 @Composable
 fun DetailScreen(
     navController: NavController,
-    weatherViewModel: WeatherViewModel,
     cityName: String,
-    backgroundColor: Color
 ) {
 
 }
