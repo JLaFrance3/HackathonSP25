@@ -10,7 +10,10 @@ enum class Screens {
         fun fromRoute(route: String?): Screens
                 = when (route?.substringBefore("/")) {
             HomeScreen.name -> HomeScreen
-            DetailScreen.name -> DetailScreen
+            JobScreen.name -> JobScreen
+            PetSuppliesScreen.name -> PetSuppliesScreen
+            ProfileScreen.name -> ProfileScreen
+            SavedJobsScreen.name -> SavedJobsScreen
             null -> HomeScreen
             else -> throw IllegalArgumentException("Route $route not recognized")
         }
