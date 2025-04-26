@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import edu.quinnipiac.ser210.hackathonsp25.components.JobCard
 import edu.quinnipiac.ser210.hackathonsp25.R
+import edu.quinnipiac.ser210.hackathonsp25.ui.theme.AppTheme
 
 @Composable
 fun SavedJobsScreen(){
@@ -27,29 +28,29 @@ fun SavedJobsScreen(){
                 .padding(16.dp)
         ){
             item{
-                JobCard("Software Engineer", "Travelers", painterResource(R.drawable.travellers))
+                JobCard("Software Engineer", "Travelers", (R.drawable.travellers))
             }
             item{
-                JobCard("iOS Developer", "Travelers", painterResource(R.drawable.travellers))
+                JobCard("iOS Developer", "Travelers", (R.drawable.travellers))
             }
             item{
-                JobCard("Operations Manager", "M&T Bank", painterResource(R.drawable.mnt))
+                JobCard("Operations Manager", "M&T Bank", (R.drawable.mnt))
             }
             item{
-                JobCard("Cloud Solutions Architect", "UNAPEN", painterResource(R.drawable.unapen))
+                JobCard("Cloud Solutions Architect", "UNAPEN", (R.drawable.unapen))
             }
             item{
-                JobCard("Data Scientist", "M&T Bank", painterResource(R.drawable.mnt))
+                JobCard("Data Scientist", "M&T Bank", (R.drawable.mnt))
             }
             item{
-                JobCard("Manufacturing Engineer", "Tesla", painterResource(R.drawable.samplelogo))
+                JobCard("Manufacturing Engineer", "Tesla", (R.drawable.samplelogo))
 
             }
             item{
-                JobCard("Content Strategist", "Netflix", painterResource(R.drawable.samplelogo))
+                JobCard("Content Strategist", "Netflix", (R.drawable.samplelogo))
             }
             item{
-                JobCard("Marketing Coordinator", "Disney", painterResource(R.drawable.samplelogo))
+                JobCard("Marketing Coordinator", "Disney", (R.drawable.samplelogo))
             }
         }
     }
@@ -58,5 +59,7 @@ fun SavedJobsScreen(){
 @Preview
 @Composable
 fun Preview(){
-    SavedJobsScreen()
+    AppTheme() {
+        SavedJobsScreen()
+    }
 }

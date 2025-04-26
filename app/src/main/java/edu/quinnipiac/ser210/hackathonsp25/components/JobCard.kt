@@ -1,5 +1,6 @@
 package edu.quinnipiac.ser210.hackathonsp25.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -38,7 +39,7 @@ import edu.quinnipiac.ser210.hackathonsp25.ui.theme.AppTheme
 fun JobCard(
     jobTitle: String,
     company: String,
-    logo: Painter
+    logo: Int
 ){
     Card(
         shape = RoundedCornerShape(28.dp),
@@ -76,7 +77,7 @@ fun JobCard(
                 ){
                     // Logo
                     Image(
-                        painter = painterResource(id = R.drawable.samplelogo),
+                        painter = painterResource(logo),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -142,7 +143,7 @@ fun JobCard(
 @Composable
 fun Preview(){
     AppTheme {
-        JobCard("Engineer", "Google", painterResource(R.drawable.samplelogo))
+        JobCard("Engineer", "Google", R.drawable.samplelogo)
     }
 }
 
